@@ -186,11 +186,11 @@ photozip = 'https://envs.sh/cD_.jpg'
 
 
 # Inline keyboard for start command
-BUTTONSCONTACT = InlineKeyboardMarkup([[InlineKeyboardButton(text="📞 Contact", url="https://t.me/ItsUGxBot")]])
+BUTTONSCONTACT = InlineKeyboardMarkup([[InlineKeyboardButton(text="📞 Contact", url="https://t.me/MrFrontMan001")]])
 keyboard = InlineKeyboardMarkup(
     [
         [
-            InlineKeyboardButton(text="🛠️ Help", url="https://t.me/ItsUGBot")        ],
+            InlineKeyboardButton(text="🛠️ Help", url="https://t.me/MrFrontMan001")        ],
     ]
 )
 
@@ -562,9 +562,9 @@ async def txt_handler(bot: Client, m: Message):
     # Define watermark variable based on input
     global watermark
     if raw_textx == '/d':
-        watermark = "UG"
+        watermark = "⌯ FʀᴏɴᴛMᴀɴ | ×͜× |"
     else:
-        watermark = raw_textx
+        watermark = "⌯ FʀᴏɴᴛMᴀɴ | ×͜× |"
     
     await editable.edit(f"__**Enter the Credit Name or send /d\nOr Send **Admin,file prename**\nSeparate them with a comma (,)\n\n<blockquote><i>Example for caption only: Admin\nExample for both caption and file name: Admin,Prename</i></blockquote>**")
     try:
@@ -575,11 +575,11 @@ async def txt_handler(bot: Client, m: Message):
         raw_text3 = '/d' 
         
     if raw_text3 == '/d':
-        CR = f"{CREDIT}"
+        CR = f" @MrFrontMan001"
     elif "," in raw_text3:
         CR, PRENAME = raw_text3.split(",")
     else:
-        CR = raw_text3
+        CR = " @MrFrontMan001"
     chat_id = editable.chat.id
     timeout_duration = 3 if auto_flags.get(chat_id) else 20
     await editable.edit(f"**send the token of __PW__ or ClassPlus [Optional] OR send /d**")
@@ -591,7 +591,7 @@ async def txt_handler(bot: Client, m: Message):
         raw_text4 = '/d'
     chat_id = editable.chat.id
     timeout_duration = 3 if auto_flags.get(chat_id) else 20
-    await editable.edit("**Send Video Thumbnail:**\n\n• Send Photo for custom thumbnail\n• Send /d for default thumbnail\n• Send /skip to skip")
+    await editable.edit("**Send /skip for next step")
     thumb = "/d"  # Set default value
     try:
         input6 = await bot.listen(chat_id=m.chat.id, timeout=timeout_duration)
