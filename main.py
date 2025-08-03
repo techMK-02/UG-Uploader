@@ -196,9 +196,9 @@ keyboard = InlineKeyboardMarkup(
 
 # Image URLs for the random image feature
 image_urls = [
-    "https://cdn.pixabay.com/photo/2025/05/21/02/38/ai-generated-9612673_1280.jpg",
-    "https://cdn.pixabay.com/photo/2025/05/21/02/38/ai-generated-9612673_1280.jpg",
-    "https://cdn.pixabay.com/photo/2025/05/21/02/38/ai-generated-9612673_1280.jpg",
+    "https://envs.sh/Nf.jpg/IMG20250803704.jpg",
+    "https://envs.sh/Nf.jpg/IMG20250803704.jpg",
+    "https://envs.sh/Nf.jpg/IMG20250803704.jpg",
     # Add more image URLs as needed
 ]
 
@@ -314,9 +314,9 @@ async def start(bot: Client, m: Message):
             if not is_authorized:
                 await m.reply_photo(
                     photo=photologo,
-                    caption="**🔒 Access Required**\n\nContact admin to get access.",
+                    caption="**Mʏ Nᴀᴍᴇ [DRM Wɪᴢᴀʀᴅ 🦋](https://t.me/DRM_Wizardbot)\n\nYᴏᴜ ᴅᴏɴ'ᴛ ʜᴀᴠᴇ ᴀᴄᴄᴇꜱꜱ ᴛᴏ ᴜꜱᴇ ᴛʜɪꜱ ʙᴏᴛ\nCᴏɴᴛᴀᴄᴛ [⌯ FʀᴏɴᴛMᴀɴ | ×͜× |](https://t.me/Mrfrontman001) ғᴏʀ ᴀᴄᴄᴇꜱꜱ",
                     reply_markup=InlineKeyboardMarkup([
-                        [InlineKeyboardButton("💫 Get Access", url="https://t.me/MrFrontMan001")]
+                        [InlineKeyboardButton("⌯ FʀᴏɴᴛMᴀɴ | ×͜× |", url="https://t.me/MrFrontMan001")]
                     ])
                 )
                 return
