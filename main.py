@@ -322,9 +322,9 @@ async def start(bot: Client, m: Message):
                 return
                 
             commands_list = (
-                "**🤖 Available Commands**\n\n"
-                "• /drm - Start Uploading...\n"
-                "• /plan - View subscription\n"
+                "**📑 ᴍʏ ᴄᴏᴍᴍᴀɴᴅꜱ ғᴏʀ ʏᴏᴜ**\n\n"
+                ">  /drm - ꜱᴛᴀʀᴛ ᴜᴘʟᴏᴀᴅɪɴɢ ᴄᴘ/ᴄᴡ ᴄᴏᴜʀꜱᴇꜱ\n"
+                ">  /plan - ᴠɪᴇᴡ ʏᴏᴜʀ ꜱᴜʙꜱᴄʀɪᴘᴛɪᴏɴ ᴅᴇᴛᴀɪʟꜱ\n"
             )
             
             if is_admin:
@@ -335,7 +335,7 @@ async def start(bot: Client, m: Message):
             
             await m.reply_photo(
                 photo=photologo,
-                caption=f"**👋 Welcome {m.from_user.first_name}!**\n\n{commands_list}",
+                caption=f"**Hey {m.from_user.first_name}!**\n\n{commands_list}",
                 reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("📚 Help", url="https://t.me/MrFrontMan001")]])
             )
             
