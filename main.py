@@ -574,9 +574,9 @@ async def txt_handler(bot: Client, m: Message):
     # Define watermark variable based on input
     global watermark
     if raw_textx == '/d':
-        watermark = "⌯ FʀᴏɴᴛMᴀɴ | ×͜× |"
+        watermark = "GovtxExam"
     else:
-        watermark = "⌯ FʀᴏɴᴛMᴀɴ | ×͜× |"
+        watermark = "GovtxExam"
     
     await editable.edit(f"__**Enter the Credit Name or send /d\nOr Send **Admin,file prename**\nSeparate them with a comma (,)\n\n<blockquote><i>Example for caption only: Admin\nExample for both caption and file name: Admin,Prename</i></blockquote>**")
     try:
@@ -864,29 +864,23 @@ async def txt_handler(bot: Client, m: Message):
 
             try:
                 cc = (
-    f"<b>──────  <i>VID ID </i>: {str(count).zfill(3)}  ──────</b>\n\n"
-    f"<b>🎥 ᴛɪᴛʟᴇ</b> : {name1}\n\n"
-    f"<blockquote>"
-    f"<b>💠 ʙᴀᴛᴄʜ :</b> {b_name}\n"
-    f"</blockquote>\n"
-    f"<b> 📥 ᴇxᴛʀᴀᴄᴛᴇᴅ ʙʏ :</b> {CR}"
+    f"<b>🏷️Fɪʟᴇ ID <b>: {str(count).zfill(3)}\n\n"
+    f"<b>🎞️ Tɪᴛʟᴇ</b> : {name1}"
+    f"<blockquote><b>📚 Bᴀᴛᴄʜ</b> : {b_name} </blockquote>\n"
+    f"<b>🎓 Exᴛʀᴀᴄᴛ Bʏ :</b> {CR}"
 )
                 cc1 = (
-    f"<b>──────  <i>PDF ID </i>: {str(count).zfill(3)}  ──────</b>\n\n"
-    f"<b>📑 ᴛɪᴛʟᴇ</b> : {name1}\n\n"
-    f"<blockquote>"
-    f"<b>💠 ʙᴀᴛᴄʜ :</b> {b_name}\n"
-    f"</blockquote>\n"
-    f"<b> 📥 ᴇxᴛʀᴀᴄᴛᴇᴅ ʙʏ :</b> {CR}"
+    f"<b>🏷️Fɪʟᴇ ID <b>: {str(count).zfill(3)}\n\n"
+    f"<b>📑 Tɪᴛʟᴇ</b> : {name1}"
+    f"<blockquote><b>📚 Bᴀᴛᴄʜ</b> : {b_name} </blockquote>\n"
+    f"<b>🎓 Exᴛʀᴀᴄᴛ Bʏ :</b> {CR}"
 )
                 cczip = f'[📁]Zip Id : {str(count).zfill(3)}\n**Zip Title :** `{name1} .zip`\n<blockquote><b>Batch Name :</b> {b_name}</blockquote>\n\n**Extracted by➤**{CR}\n' 
                 ccimg = (
-    f"<b>──────  <i>IMG ID </i>: {str(count).zfill(3)}  ──────</b>\n\n"
-    f"<b>🖼️ ᴛɪᴛʟᴇ</b> : {name1}\n\n"
-    f"<blockquote>"
-    f"<b>💠 ʙᴀᴛᴄʜ :</b> {b_name}\n"
-    f"</blockquote>\n"
-    f"<b> 📥 ᴇxᴛʀᴀᴄᴛᴇᴅ ʙʏ :</b> {CR}"
+    f"<b>🏷️Fɪʟᴇ ID <b>: {str(count).zfill(3)}\n\n"
+    f"<b>🖼️ Tɪᴛʟᴇ</b> : {name1}"
+    f"<blockquote><b>📚 Bᴀᴛᴄʜ</b> : {b_name} </blockquote>\n"
+    f"<b>🎓 Exᴛʀᴀᴄᴛ Bʏ :</b> {CR}"
 )
                 ccm = f'[🎵]Audio Id : {str(count).zfill(3)}\n**Audio Title :** `{name1} .mp3`\n<blockquote><b>Batch Name :</b> {b_name}</blockquote>\n\n**Extracted by➤**{CR}\n'
                 cchtml = f'[🌐]Html Id : {str(count).zfill(3)}\n**Html Title :** `{name1} .html`\n<blockquote><b>Batch Name :</b> {b_name}</blockquote>\n\n**Extracted by➤**{CR}\n'
