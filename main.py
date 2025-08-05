@@ -348,8 +348,8 @@ async def start(bot: Client, m: Message):
     [
         InlineKeyboardButton("ғᴇᴀᴛᴜʀᴇꜱ 🪔", callback_data="help"),
         InlineKeyboardButton("ᴅᴇᴛᴀɪʟꜱ 🦋", callback_data="help")
-    ]
-])
+    ]])
+)
             
     except Exception as e:
         print(f"Error in start command: {str(e)}")
