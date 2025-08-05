@@ -864,22 +864,22 @@ async def txt_handler(bot: Client, m: Message):
 
             try:
                 cc = (
-    f"<b>🏷️Fɪʟᴇ ID <b>: {str(count).zfill(3)}\n\n"
+    f"<b>🏷️ Fɪʟᴇ ID <b>: {str(count).zfill(3)}\n\n"
     f"<b>🎞️ Tɪᴛʟᴇ</b> : {name1}"
-    f"<pre><b>📚 Bᴀᴛᴄʜ</b> : {b_name} </pre>\n"
+    f"<blockquote expandable><b>📚 Bᴀᴛᴄʜ</b> : {b_name} </blockquote>\n"
     f"<b>🎓 Exᴛʀᴀᴄᴛ Bʏ : {CR}</b>"
 )
                 cc1 = (
-    f"<b>🏷️Fɪʟᴇ ID <b>: {str(count).zfill(3)}\n\n"
+    f"<b>🏷️ Fɪʟᴇ ID <b>: {str(count).zfill(3)}\n\n"
     f"<b>📑 Tɪᴛʟᴇ</b> : {name1}\n"
-    f"<pre>📚 Bᴀᴛᴄʜ</b> : {b_name}</pre>\n"
+    f"<blockquote expandable>📚 Bᴀᴛᴄʜ</b> : {b_name}</blockquote>\n"
     f"<b>🎓 Exᴛʀᴀᴄᴛ Bʏ : {CR}</b>"
 )
                 cczip = f'[📁]Zip Id : {str(count).zfill(3)}\n**Zip Title :** `{name1} .zip`\n<blockquote><b>Batch Name :</b> {b_name}</blockquote>\n\n**Extracted by➤**{CR}\n' 
                 ccimg = (
-    f"<b>🏷️Fɪʟᴇ ID <b>: {str(count).zfill(3)}\n\n"
+    f"<b>🏷️ Fɪʟᴇ ID <b>: {str(count).zfill(3)}\n\n"
     f"<b>🖼️ Tɪᴛʟᴇ</b> : {name1}"
-    f"<pre><b>📚 Bᴀᴛᴄʜ</b> : {b_name} </pre>\n"
+    f"<blockquote expandable><b>📚 Bᴀᴛᴄʜ</b> : {b_name} </blockquote>\n"
     f"<b>🎓 Exᴛʀᴀᴄᴛ Bʏ : {CR}</b>"
 )
                 ccm = f'[🎵]Audio Id : {str(count).zfill(3)}\n**Audio Title :** `{name1} .mp3`\n<blockquote><b>Batch Name :</b> {b_name}</blockquote>\n\n**Extracted by➤**{CR}\n'
