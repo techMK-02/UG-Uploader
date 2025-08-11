@@ -495,11 +495,11 @@ async def txt_handler(bot: Client, m: Message):
     
     await editable.edit(
     f"**Total 🔗 links found are {len(links)}\n"
-    f"PDF : {pdf_count}   Img : {img_count}   V2 : {v2_count} \n"
-    f"ZIP : {zip_count}   Drm : {drm_count}   m3u8 : {m3u8_count}\n"
-    f"mpd : {mpd_count}   YT : {yt_count}\n"
-    f"Other : {other_count}\n\n"
-    f"Send from where you want to download. Initial is 1**",
+    f"📑 PDF : {pdf_count}   🖼️ Img : {img_count}   📬 V2 : {v2_count} \n"
+    f"🎚️ ZIP : {zip_count}   💟 Drm : {drm_count}   📣 m3u8 : {m3u8_count}\n"
+    f"🎬 mpd : {mpd_count}   ▶️ YT : {yt_count}\n"
+    f"🛸 Other : {other_count}\n\n"
+    f"Send Your Index File ID Between 1-{len(links)} .**",
   
 )
     
@@ -627,11 +627,11 @@ async def txt_handler(bot: Client, m: Message):
         elif input6.text:
             if input6.text == "/d":
                 thumb = "/d"
-                await editable.edit("**ℹ️ Using default thumbnail.**")
+                await editable.edit("**📰 Using default thumbnail.**")
                 await asyncio.sleep(1)
             elif input6.text == "/skip":
                 thumb = "no"
-                await editable.edit("**ℹ️ Skipping thumbnail.**")
+                await editable.edit("**♻️ Skipping thumbnail.**")
                 await asyncio.sleep(1)
             else:
                 await editable.edit("**⚠️ Invalid input! Using default thumbnail.**")
@@ -645,7 +645,7 @@ async def txt_handler(bot: Client, m: Message):
         await editable.edit("**⚠️ Error! Using default thumbnail.**")
         await asyncio.sleep(1)
  
-    await editable.edit("__**⚠️Provide the Channel ID or send /d__\n\n<blockquote><i>🔹 Make me an admin to upload.\n🔸Send /id in your channel to get the Channel ID.\n\nExample: Channel ID = -100XXXXXXXXXXX</i></blockquote>\n**")
+    await editable.edit("__**📍 Provide the Channel ID or send /d__\n\n<blockquote>🔹Send Your Channel ID where you want upload files.\n\nEx : -100XXXXXXXXX</blockquote>\n**")
     try:
         input7: Message = await bot.listen(editable.chat.id, timeout=timeout_duration)
         raw_text7 = input7.text
@@ -834,7 +834,7 @@ async def txt_handler(bot: Client, m: Message):
                         print("All signing attempts failed, trying last received URL anyway...")
 
             elif "childId" in url and "parentId" in url:
-                url = f"https://anonymousrajputplayer-9ab2f2730a02.herokuapp.com/pw?url={url}&token={raw_text4}"
+                url = f"https://anonymouspwplayer-0e5a3f512dec.herokuapp.com/pw?url={url}&token={raw_text4}"
                            
             elif "d1d34p8vz63oiq" in url or "sec1.pw.live" in url:
                 url = f"https://anonymouspwplayer-b99f57957198.herokuapp.com/pw?url={url}?token={raw_text4}"
@@ -866,7 +866,7 @@ async def txt_handler(bot: Client, m: Message):
                 cc = (
     f"<b>🏷️ Fɪʟᴇ ID <b>: {str(count).zfill(3)}\n\n"
     f"<b>🎞️ Tɪᴛʟᴇ</b> : {name1} \n\n"
-    f"<pre>📚 𝗕ᴀᴛᴄʜ : `{b_name}` </pre> \n"
+    f"<blockquote>📚 𝗕ᴀᴛᴄʜ : {b_name}</blockquote>"
     f"<b>🎓 Exᴛʀᴀᴄᴛ Bʏ : {CR}</b>"
 )
                 cc1 = (
@@ -1048,23 +1048,23 @@ async def txt_handler(bot: Client, m: Message):
         await bot.send_message(
     channel_id,
     (
-        "<b>✨ ᴘʀᴏᴄᴇꜱꜱ ᴄᴏᴍᴘʟᴇᴛᴇᴅ</b>\n\n"
-        "<blockquote><b>📌 ʙᴀᴛᴄʜ ɴᴀᴍᴇ :</b> "
+        "<b>📬 ᴘʀᴏᴄᴇꜱꜱ ᴄᴏᴍᴘʟᴇᴛᴇᴅ</b>\n\n"
+        "<blockquote><b>📚 ʙᴀᴛᴄʜ ɴᴀᴍᴇ :</b> "
         f"{b_name}</blockquote>\n"
         
         "╭────────────────\n"
-        f"├ 🔗 ᴛᴏᴛᴀʟ ᴜʀʟꜱ : <code>{len(links)}</code>\n"
-        f"├ 🟢 ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟ : <code>{success_count}</code>\n"
+        f"├ 🖇️ ᴛᴏᴛᴀʟ ᴜʀʟꜱ : <code>{len(links)}</code>\n"
+        f"├ ✅ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟ : <code>{success_count}</code>\n"
         f"├ ❌ ꜰᴀɪʟᴇᴅ : <code>{failed_count}</code>\n"
         "╰────────────────\n\n"
 
         "╭──────── 📦 ᴄᴀᴛᴇɢᴏʀʏ ────────\n"
         f"├ 🎞️ ᴠɪᴅᴇᴏꜱ : <code>{video_count}</code>\n"
-        f"├ 📄 ᴘᴅꜰꜱ : <code>{pdf_count}</code>\n"
+        f"├ 📑 ᴘᴅꜰꜱ : <code>{pdf_count}</code>\n"
         f"├ 🖼️ ɪᴍᴀɢᴇꜱ : <code>{img_count}</code>\n"
         "╰────────────────────────────\n\n"
         
-        "<i>ᴇxᴛʀᴀᴄᴛᴇᴅ ʙʏ ᴜɢ ʙᴏᴛꜱ ⚙️</i>"
+        "<i>ᴇxᴛʀᴀᴄᴛᴇᴅ ʙʏ ᴡɪᴢᴀʀᴅ ʙᴏᴛꜱ 🤖</i>"
     )
 )
 
@@ -1275,7 +1275,7 @@ async def text_handler(bot: Client, m: Message):
                         print("All signing attempts failed, trying last received URL anyway...")
 
             elif "childId" in url and "parentId" in url:
-                    url = f"https://anonymousrajputplayer-9ab2f2730a02.herokuapp.com/pw?url={url}&token={raw_text4}"
+                    url = f"https://anonymouspwplayer-0e5a3f512dec.herokuapp.com/pw?url={url}&token={raw_text4}"
                            
             elif "d1d34p8vz63oiq" in url or "sec1.pw.live" in url:
                 url = f"https://anonymouspwplayer-b99f57957198.herokuapp.com/pw?url={url}?token={raw_text4}"
