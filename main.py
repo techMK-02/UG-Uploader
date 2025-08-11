@@ -495,10 +495,10 @@ async def txt_handler(bot: Client, m: Message):
     
     await editable.edit(
     f"**Total 🔗 links found are {len(links)}\n"
-    f"📑 PDF : {pdf_count}   🖼️ Img : {img_count}   📬 V2 : {v2_count} \n"
-    f"🎚️ ZIP : {zip_count}   💟 Drm : {drm_count}   📣 m3u8 : {m3u8_count}\n"
-    f"🎬 mpd : {mpd_count}   ▶️ YT : {yt_count}\n"
-    f"🛸 Other : {other_count}\n\n"
+    f"ᴘᴅғ : {pdf_count}   ɪᴍɢ : {img_count}   ᴠ𝟸 : {v2_count} \n"
+    f"ᴢɪᴘ : {zip_count}   ᴅʀᴍ : {drm_count}   ᴍ𝟹ᴜ𝟾 : {m3u8_count}\n"
+    f"ᴍᴘᴅ : {mpd_count}   ʏᴛ : {yt_count}\n"
+    f"          ᴏᴛʜᴇʀꜱ : {other_count}\n\n"
     f"Send Your Index File ID Between 1-{len(links)} .**",
   
 )
