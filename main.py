@@ -866,7 +866,7 @@ async def txt_handler(bot: Client, m: Message):
                 cc = (
     f"<b>🏷️ Fɪʟᴇ ID <b>: {str(count).zfill(3)}\n\n"
     f"<b>🎞️ Tɪᴛʟᴇ</b> : {name1} \n\n"
-    f"<blockquote>📚 𝗕ᴀᴛᴄʜ : {b_name}</blockquote>"
+    f"<pre>📚 𝗕ᴀᴛᴄʜ : {b_name}</pre>\n"
     f"<b>🎓 Exᴛʀᴀᴄᴛ Bʏ : {CR}</b>"
 )
                 cc1 = (
