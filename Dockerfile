@@ -35,11 +35,12 @@ RUN wget -q https://github.com/axiomatic-systems/Bento4/archive/v1.6.0-639.zip &
 
 # Install Python dependencies
 RUN pip3 install --no-cache-dir --upgrade pip && \
-    pip3 install --no-cache-dir -r requirements.txt && \
+    pip3 install --no-cache-dir -r ugbots.txt && \
     pip3 install --no-cache-dir yt-dlp
 
 # Run the application
 CMD ["sh", "-c", "gunicorn app:app & python3 main.py"]
+
 
 
 
