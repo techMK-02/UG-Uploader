@@ -1,51 +1,63 @@
-FROM python:3.12-slim
+# Use a slim Python 3.12 base image (Debian-based for better compatibility)
+FROM python:3.12-slim-bookworm
 
 # Set the working directory
 WORKDIR /app
 
-# Copy all files
-COPY . .
-
-# Install system dependencies
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
+# Install system dependencies first (optimized for download/upload performance)
+RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc \
+    g++ \
+    cmake \
+    make \
     libffi-dev \
     ffmpeg \
     aria2 \
-    make \
-    g++ \
-    cmake \
-    unzip \
     wget \
-    ca-certificates && \
-    rm -rf /var/lib/apt/lists/*
+    unzip \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
-# Install Bento4 tools (for mp4decrypt)
-RUN wget -q https://github.com/axiomatic-systems/Bento4/archive/v1.6.0-639.zip && \
-    unzip v1.6.0-639.zip && \
-    cd Bento4-1.6.0-639 && \
-    mkdir build && \
-    cd build && \
-    cmake .. && \
-    make -j$(nproc) && \
-    cp mp4decrypt /usr/local/bin/ && \
-    cd ../.. && \
-    rm -rf Bento4-1.6.0-639 v1.6.0-639.zip
+# Install Bento4 (manually install just mp4decrypt)
+RUN wget -q https://github.com/axiomatic-systems/Bento4/archive/refs/tags/v1.6.0-639.zip \
+    && unzip v1.6.0-639.zip \
+    && cd Bento4-1.6.0-639 \
+    && mkdir cmakebuild \
+    && cd cmakebuild \
+    && cmake -DCMAKE_BUILD_TYPE=Release .. \
+    && make -j$(nproc --all) mp4decrypt \
+    && cp mp4decrypt /usr/local/bin/ \
+    && cd ../.. \
+    && rm -rf Bento4-1.6.0-639 v1.6.0-639.zip
 
-# Install Python dependencies
-RUN pip3 install --no-cache-dir --upgrade pip && \
-    pip3 install --no-cache-dir -r ugbots.txt && \
-    pip3 install --no-cache-dir yt-dlp
+# Copy requirements file first to leverage Docker cache
+COPY ugbots.txt .
 
-# Run the application
-CMD ["sh", "-c", "gunicorn app:app & python3 main.py"]
+# Install Python dependencies with optimized flags
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir --upgrade -r ugbots.txt \
+    && pip install --no-cache-dir --upgrade "yt-dlp[default]"
 
+# Copy the rest of the application
+COPY . .
 
+# Optimize aria2 configuration for Render's network
+RUN mkdir -p /etc/aria2 \
+    && echo "disable-ipv6=true\n" \
+         "file-allocation=falloc\n" \
+         "optimize-concurrent-downloads=true\n" \
+         "max-concurrent-downloads=10\n" \
+         "max-connection-per-server=16\n" \
+         "split=16\n" \
+         "min-split-size=1M\n" \
+         "continue=true\n" \
+         "check-integrity=true" > /etc/aria2/aria2.conf
 
-
-
-
-
-
-
+# Use gunicorn with reduced workers to save memory
+CMD gunicorn --bind 0.0.0.0:${PORT:-8000} \
+    --workers 1 \
+    --threads 2 \
+    --timeout 120 \
+    app:app & \
+    aria2c --enable-rpc --rpc-listen-all --daemon=true && \
+    python3 main.py
