@@ -1,36 +1,50 @@
-# ✅ Base image: Best stable Python version
-FROM python:3.10.13-slim
+FROM python:3.12-slim
 
-# ✅ Set working directory
+# Set the working directory
 WORKDIR /app
 
-# ✅ Install system dependencies
-RUN apt-get update && apt-get install -y \
-    gcc \
-    ffmpeg \
-    aria2 \
-    libffi-dev \
-    build-essential \
-    python3-dev \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
-# ✅ Copy all source code to container
+# Copy all files
 COPY . .
 
-# ✅ Make mp4decrypt executable (if present)
-RUN chmod +x /app/tools/mp4decrypt || true
+# Install system dependencies
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    gcc \
+    libffi-dev \
+    ffmpeg \
+    aria2 \
+    make \
+    g++ \
+    cmake \
+    unzip \
+    wget \
+    ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
 
-# ✅ Upgrade pip and install Python packages
-RUN pip install --no-cache-dir --upgrade pip \
-    && pip install --no-cache-dir -r ugbots.txt \
-    && pip install --no-cache-dir -U yt-dlp
+# Install Bento4 tools (for mp4decrypt)
+RUN wget -q https://github.com/axiomatic-systems/Bento4/archive/v1.6.0-639.zip && \
+    unzip v1.6.0-639.zip && \
+    cd Bento4-1.6.0-639 && \
+    mkdir build && \
+    cd build && \
+    cmake .. && \
+    make -j$(nproc) && \
+    cp mp4decrypt /usr/local/bin/ && \
+    cd ../.. && \
+    rm -rf Bento4-1.6.0-639 v1.6.0-639.zip
 
-# ✅ Remove pyrofork if accidentally included
-RUN pip uninstall -y pyrofork || true
+# Install Python dependencies
+RUN pip3 install --no-cache-dir --upgrade pip && \
+    pip3 install --no-cache-dir -r requirements.txt && \
+    pip3 install --no-cache-dir yt-dlp
 
-# ✅ Explicitly install stable Pyrogram + TgCrypto
-RUN pip install --no-cache-dir -U pyrogram==2.0.106 tgcrypto==1.2.5
-
-# ✅ Final command: start Flask + Bot together
+# Run the application
 CMD ["sh", "-c", "gunicorn app:app & python3 main.py"]
+
+
+
+
+
+
+
+
