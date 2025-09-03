@@ -1,4 +1,4 @@
-# ⚙️ Standard Library
+# 🔧 Standard Library
 import os
 import re
 import sys
@@ -14,10 +14,10 @@ from datetime import datetime, timedelta
 from base64 import b64encode, b64decode
 from subprocess import getstatusoutput
 
-# 🌏 Timezone
+# 🕒 Timezone
 import pytz
 
-# 💀 Third-party Libraries
+# 📦 Third-party Libraries
 import aiohttp
 import aiofiles
 import requests
@@ -32,7 +32,7 @@ from pytube import YouTube
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import unpad
 
-# 🚧 Pyrogram
+# ⚙️ Pyrogram
 from pyrogram import Client, filters, idle
 from pyrogram.handlers import MessageHandler
 from pyrogram.types import (
@@ -56,18 +56,25 @@ from pyrogram.errors.exceptions.bad_request_400 import MessageNotModified
 
 # 🧠 Bot Modules
 import auth
-import Wizard as helper
-from Wizard import *
+import ug as helper
+from ug import *
 
 from clean import register_clean_handler
 from logs import logging
 from utils import progress_bar
 from vars import *
 from pyromod import listen
+import apixug
+from apixug import SecureAPIClient
 from db import db
 
+auto_flags = {}
+auto_clicked = False
+client = SecureAPIClient()
+apis = client.get_apis()
+
 # Global variables
-watermark = "DevWizard02"  # Default value
+watermark = "UG"  # Default value
 count = 0
 userbot = None
 timeout_duration = 300  # 5 minutes
@@ -172,26 +179,26 @@ bot.add_handler(MessageHandler(auth.my_plan_cmd, filters.command("plan") & filte
 cookies_file_path = os.getenv("cookies_file_path", "youtube_cookies.txt")
 api_url = "http://master-api-v3.vercel.app/"
 api_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNzkxOTMzNDE5NSIsInRnX3VzZXJuYW1lIjoi4p61IFtvZmZsaW5lXSIsImlhdCI6MTczODY5MjA3N30.SXzZ1MZcvMp5sGESj0hBKSghhxJ3k1GTWoBUbivUe1I"
-photologo = 'https://envs.sh/Nf.jpg/IMG20250803704.jpg' #https://envs.sh/fH.jpg/IMG20250803719.jpg
-photoyt = 'https://tinypic.host/images/2025/03/18/YouTube-Logo.wine.png' #https://envs.sh/fH.jpg/IMG20250803719.jpg
+photologo = 'https://cdn.pixabay.com/photo/2025/05/21/02/38/ai-generated-9612673_1280.jpg' #https://envs.sh/GV0.jpg
+photoyt = 'https://tinypic.host/images/2025/03/18/YouTube-Logo.wine.png' #https://envs.sh/GVi.jpg
 photocp = 'https://tinypic.host/images/2025/03/28/IMG_20250328_133126.jpg'
-photozip = 'https://envs.sh/fH.jpg/IMG20250803719.jpg'
+photozip = 'https://envs.sh/cD_.jpg'
 
 
 # Inline keyboard for start command
-BUTTONSCONTACT = InlineKeyboardMarkup([[InlineKeyboardButton(text="📞 Contact", url="https://t.me/MrFrontMan001")]])
+BUTTONSCONTACT = InlineKeyboardMarkup([[InlineKeyboardButton(text="📞 Contact", url="https://t.me/ItsUGxBot")]])
 keyboard = InlineKeyboardMarkup(
     [
         [
-            InlineKeyboardButton(text="🛠️ Help", url="https://t.me/MrFrontMan001")        ],
+            InlineKeyboardButton(text="🛠️ Help", url="https://t.me/ItsUGBot")        ],
     ]
 )
 
 # Image URLs for the random image feature
 image_urls = [
-    "https://envs.sh/Nf.jpg/IMG20250803704.jpg",
-    "https://envs.sh/Nf.jpg/IMG20250803704.jpg",
-    "https://envs.sh/Nf.jpg/IMG20250803704.jpg",
+    "https://cdn.pixabay.com/photo/2025/05/21/02/38/ai-generated-9612673_1280.jpg",
+    "https://cdn.pixabay.com/photo/2025/05/21/02/38/ai-generated-9612673_1280.jpg",
+    "https://cdn.pixabay.com/photo/2025/05/21/02/38/ai-generated-9612673_1280.jpg",
     # Add more image URLs as needed
 ]
 
@@ -307,22 +314,17 @@ async def start(bot: Client, m: Message):
             if not is_authorized:
                 await m.reply_photo(
                     photo=photologo,
-                    caption="**Mʏ Nᴀᴍᴇ [DRM Wɪᴢᴀʀᴅ 🦋](https://t.me/DRM_Wizardbot)\n\nYᴏᴜ ᴅᴏɴ'ᴛ ʜᴀᴠᴇ ᴀᴄᴄᴇꜱꜱ ᴛᴏ ᴜꜱᴇ ᴛʜɪꜱ ʙᴏᴛ\nCᴏɴᴛᴀᴄᴛ [⌯ FʀᴏɴᴛMᴀɴ | ×͜× |](https://t.me/Mrfrontman001) ғᴏʀ ᴀᴄᴄᴇꜱꜱ**",
+                    caption="**🔒 Access Required**\n\nContact admin to get access.",
                     reply_markup=InlineKeyboardMarkup([
-    [
-        InlineKeyboardButton("⌯ FʀᴏɴᴛMᴀɴ | ×͜× |", url="https://t.me/MrFrontMan001")
-    ],
-    [
-        InlineKeyboardButton("ғᴇᴀᴛᴜʀᴇꜱ 🪔", callback_data="help"),
-        InlineKeyboardButton("ᴅᴇᴛᴀɪʟꜱ 🦋", callback_data="help")
-    ]
-])
+                        [InlineKeyboardButton("💫 Get Access", url="https://t.me/ItsUGBot")]
+                    ])
                 )
                 return
                 
             commands_list = (
-                "**>  /drm - ꜱᴛᴀʀᴛ ᴜᴘʟᴏᴀᴅɪɴɢ ᴄᴘ/ᴄᴡ ᴄᴏᴜʀꜱᴇꜱ**\n"
-                "**>  /plan - ᴠɪᴇᴡ ʏᴏᴜʀ ꜱᴜʙꜱᴄʀɪᴘᴛɪᴏɴ ᴅᴇᴛᴀɪʟꜱ**\n"
+                "**🤖 Available Commands**\n\n"
+                "• /drm - Start Uploading...\n"
+                "• /plan - View subscription\n"
             )
             
             if is_admin:
@@ -333,16 +335,9 @@ async def start(bot: Client, m: Message):
             
             await m.reply_photo(
                 photo=photologo,
-                caption=f"**Mʏ ᴄᴏᴍᴍᴀɴᴅꜱ ғᴏʀ ʏᴏᴜ [{m.from_user.first_name} ](tg://settings)**\n\n{commands_list}",
-                reply_markup=InlineKeyboardMarkup([
-    [
-        InlineKeyboardButton("⌯ FʀᴏɴᴛMᴀɴ | ×͜× |", url="https://t.me/MrFrontMan001")
-    ],
-    [
-        InlineKeyboardButton("ғᴇᴀᴛᴜʀᴇꜱ 🪔", callback_data="help"),
-        InlineKeyboardButton("ᴅᴇᴛᴀɪʟꜱ 🦋", callback_data="help")
-    ]])
-)
+                caption=f"**👋 Welcome {m.from_user.first_name}!**\n\n{commands_list}",
+                reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("📚 Help", url="https://t.me/ItsUGBot")]])
+            )
             
     except Exception as e:
         print(f"Error in start command: {str(e)}")
@@ -364,11 +359,11 @@ auth_filter = filters.create(auth_check_filter)
 @bot.on_message(~auth_filter & filters.private & filters.command)
 async def unauthorized_handler(client, message: Message):
     await message.reply(
-        "<b>Mʏ Nᴀᴍᴇ [DRM Wɪᴢᴀʀᴅ 🦋](https://t.me/DRM_Wizardbot)</b>\n\n"
+        "<b>🔒 Access Restricted</b>\n\n"
         "<blockquote>You need to have an active subscription to use this bot.\n"
         "Please contact admin to get premium access.</blockquote>",
         reply_markup=InlineKeyboardMarkup([[
-            InlineKeyboardButton("💫 Get Premium Access", url="https://t.me/MrFrontMan001")
+            InlineKeyboardButton("💫 Get Premium Access", url="https://t.me/ItsUGBot")
         ]])
     )
 
@@ -488,11 +483,11 @@ async def txt_handler(bot: Client, m: Message):
     
     await editable.edit(
     f"**Total 🔗 links found are {len(links)}\n"
-    f"ᴘᴅғ : {pdf_count}   ɪᴍɢ : {img_count}   ᴠ𝟸 : {v2_count} \n"
-    f"ᴢɪᴘ : {zip_count}   ᴅʀᴍ : {drm_count}   ᴍ𝟹ᴜ𝟾 : {m3u8_count}\n"
-    f"ᴍᴘᴅ : {mpd_count}   ʏᴛ : {yt_count}\n"
-    f"          ᴏᴛʜᴇʀꜱ : {other_count}\n\n"
-    f"Send Your Index File ID Between 1-{len(links)} .**",
+    f"PDF : {pdf_count}   Img : {img_count}   V2 : {v2_count} \n"
+    f"ZIP : {zip_count}   Drm : {drm_count}   m3u8 : {m3u8_count}\n"
+    f"mpd : {mpd_count}   YT : {yt_count}\n"
+    f"Other : {other_count}\n\n"
+    f"Send from where you want to download. Initial is 1**",
   
 )
     
@@ -556,7 +551,7 @@ async def txt_handler(bot: Client, m: Message):
     chat_id = editable.chat.id
     timeout_duration = 3 if auto_flags.get(chat_id) else 20
 
-    await editable.edit("**1. Enter A Text For Watermark\n2.Send /d For Default **")
+    await editable.edit("**Enter watermark text or send /d**")
     try:
         inputx: Message = await bot.listen(editable.chat.id, timeout=timeout_duration)
         raw_textx = inputx.text
@@ -567,11 +562,11 @@ async def txt_handler(bot: Client, m: Message):
     # Define watermark variable based on input
     global watermark
     if raw_textx == '/d':
-        watermark = " "
+        watermark = "UG"
     else:
         watermark = raw_textx
     
-    await editable.edit(f"**1. Send Your Name Fir Caption\n2. Send /d Gor default Credit **")
+    await editable.edit(f"__**Enter the Credit Name or send /d\nOr Send **Admin,file prename**\nSeparate them with a comma (,)\n\n<blockquote><i>Example for caption only: Admin\nExample for both caption and file name: Admin,Prename</i></blockquote>**")
     try:
         input3: Message = await bot.listen(editable.chat.id, timeout=timeout_duration)
         raw_text3 = input3.text
@@ -584,10 +579,10 @@ async def txt_handler(bot: Client, m: Message):
     elif "," in raw_text3:
         CR, PRENAME = raw_text3.split(",")
     else:
-        CR = raw_text3.split(",")
+        CR = raw_text3
     chat_id = editable.chat.id
     timeout_duration = 3 if auto_flags.get(chat_id) else 20
-    await editable.edit(f"**1. Sebd PW Token For mpd urls \n 2. Send CP Token or /d**")
+    await editable.edit(f"**send the token of __PW__ or ClassPlus [Optional] OR send /d**")
     try:
         input4: Message = await bot.listen(editable.chat.id, timeout=timeout_duration)
         raw_text4 = input4.text
@@ -596,7 +591,7 @@ async def txt_handler(bot: Client, m: Message):
         raw_text4 = '/d'
     chat_id = editable.chat.id
     timeout_duration = 3 if auto_flags.get(chat_id) else 20
-    await editable.edit("**1. Send Image For Thumbnail\n2. Send /d For Default Thumbnail\n3. Send /skip For Skipping Thumbnail**")
+    await editable.edit("**Send Video Thumbnail:**\n\n• Send Photo for custom thumbnail\n• Send /d for default thumbnail\n• Send /skip to skip")
     thumb = "/d"  # Set default value
     try:
         input6 = await bot.listen(chat_id=m.chat.id, timeout=timeout_duration)
@@ -620,11 +615,11 @@ async def txt_handler(bot: Client, m: Message):
         elif input6.text:
             if input6.text == "/d":
                 thumb = "/d"
-                await editable.edit("**📰 Using default thumbnail.**")
+                await editable.edit("**ℹ️ Using default thumbnail.**")
                 await asyncio.sleep(1)
             elif input6.text == "/skip":
                 thumb = "no"
-                await editable.edit("**♻️ Skipping thumbnail.**")
+                await editable.edit("**ℹ️ Skipping thumbnail.**")
                 await asyncio.sleep(1)
             else:
                 await editable.edit("**⚠️ Invalid input! Using default thumbnail.**")
@@ -638,7 +633,7 @@ async def txt_handler(bot: Client, m: Message):
         await editable.edit("**⚠️ Error! Using default thumbnail.**")
         await asyncio.sleep(1)
  
-    await editable.edit("__**📢 Provide the Channel ID or send /d__\n\n<blockquote>🔹Send Your Channel ID where you want upload files.\n\nEx : `-100XXXXXXXXX`</blockquote>\n**")
+    await editable.edit("__**⚠️Provide the Channel ID or send /d__\n\n<blockquote><i>🔹 Make me an admin to upload.\n🔸Send /id in your channel to get the Channel ID.\n\nExample: Channel ID = -100XXXXXXXXXXX</i></blockquote>\n**")
     try:
         input7: Message = await bot.listen(editable.chat.id, timeout=timeout_duration)
         raw_text7 = input7.text
@@ -690,13 +685,15 @@ async def txt_handler(bot: Client, m: Message):
             if "acecwply" in url:
                 cmd = f'yt-dlp -o "{name}.%(ext)s" -f "bestvideo[height<={raw_text2}]+bestaudio" --hls-prefer-ffmpeg --no-keep-video --remux-video mkv --no-warning "{url}"'
 
-            elif "https://cpvod.testbook.com/" in url or "classplusapp.com/drm/" in url:
-                url = url.replace("https://cpvod.testbook.com/","https://media-cdn.classplusapp.com/drm/")
-                url = f"https://covercel.vercel.app/extract_keys?url={url}@bots_updatee&user_id=7793257011"
+            elif "https://cpvideocdn.testbook.com/" in url or "https://cpvod.testbook.com/" in url:
+                url = url.replace("https://cpvideocdn.testbook.com/","https://media-cdn.classplusapp.com/drm/")
+                url = url.replace("https://cpvod.testbook.com/", "https://media-cdn.classplusapp.com/drm/")
+
+
+                url = apis["API_DRM"] + url
                 mpd, keys = helper.get_mps_and_keys(url)
                 url = mpd
                 keys_string = " ".join([f"--key {key}" for key in keys])
-
             elif "https://static-trans-v1.classx.co.in" in url or "https://static-trans-v2.classx.co.in" in url:
                 base_with_params, signature = url.split("*")
 
@@ -747,29 +744,85 @@ async def txt_handler(bot: Client, m: Message):
                     url = base_url.replace("https://static-db-v2.classx.co.in", "https://appx-content-v2.classx.co.in")
 
 
-            elif "classplusapp" in url:
-                signed_api = f"https://covercel.vercel.app/extract_keys?url={url}@bots_updatee&user_id=7793257011"
-                response = requests.get(signed_api, timeout=20)
-                url = response.text.strip()
-                url = response.json()['url']  
-                
-            elif "tencdn.classplusapp" in url:
-                headers = {'host': 'api.classplusapp.com', 'x-access-token': f'{apitoken}', 'accept-language': 'EN', 'api-version': '18', 'app-version': '1.4.73.2', 'build-number': '35', 'connection': 'Keep-Alive', 'content-type': 'application/json', 'device-details': 'Xiaomi_Redmi 7_SDK-32', 'device-id': 'c28d3cb16bbdac01', 'region': 'IN', 'user-agent': 'Mobile-Android', 'webengage-luid': '00000187-6fe4-5d41-a530-26186858be4c', 'accept-encoding': 'gzip'}
-                params = {"url": f"{url}"}
-                response = requests.get('https://api.classplusapp.com/cams/uploader/video/jw-signed-url', headers=headers, params=params)
-                url = response.json()['url']  
-           
-            elif 'videos.classplusapp' in url:
-                url = requests.get(f'https://api.classplusapp.com/cams/uploader/video/jw-signed-url?url={url}', headers={'x-access-token': f'{cptoken}'}).json()['url']
-            
-            elif 'media-cdn.classplusapp.com' in url or 'media-cdn-alisg.classplusapp.com' in url or 'media-cdn-a.classplusapp.com' in url: 
-                headers = {'host': 'api.classplusapp.com', 'x-access-token': f'{apitoken}', 'accept-language': 'EN', 'api-version': '18', 'app-version': '1.4.73.2', 'build-number': '35', 'connection': 'Keep-Alive', 'content-type': 'application/json', 'device-details': 'Xiaomi_Redmi 7_SDK-32', 'device-id': 'c28d3cb16bbdac01', 'region': 'IN', 'user-agent': 'Mobile-Android', 'webengage-luid': '00000187-6fe4-5d41-a530-26186858be4c', 'accept-encoding': 'gzip'}
-                params = {"url": f"{url}"}
-                response = requests.get('https://api.classplusapp.com/cams/uploader/video/jw-signed-url', headers=headers, params=params)
-                url   = response.json()['url']
+            elif "classplusapp.com/drm/" in url:
+                print("\n🔐 Fetching DRM keys...")
+                api_url = apis["API_DRM"] + url
+                max_retries = 2  # Reduced retries
+                retry_count = 0
+
+                while retry_count < max_retries:
+                    try:
+                        retry_count += 1
+                        mpd, keys = helper.get_mps_and_keys(api_url)
+
+                        if mpd and keys:
+                            url = mpd
+                            keys_string = " ".join([f"--key {key}" for key in keys])
+                            print("✅ DRM keys fetched!")
+                            break
+                        
+                        print(f"⚠️ Retry {retry_count}/{max_retries}...")
+                        await asyncio.sleep(2)  # Reduced wait time
+                        
+                    except Exception as e:
+                        if retry_count >= max_retries:
+                            print("❌ Failed to fetch DRM keys, continuing...")
+                            break
+                        print(f"⚠️ Retry {retry_count}/{max_retries}...")
+                        await asyncio.sleep(2)  # Reduced wait time
+
+            elif 'media-cdn.classplusapp.com' in url or 'media-cdn-alisg.classplusapp.com' in url or 'media-cdn-a.classplusapp.com' in url or 'videos.classplusapp' in url or 'tencdn.classplusapp' in url: 
+                if 'm3u8' in url:
+                    print(f"Processing Classplus URL: {url}")
+                    max_retries = 3  # Maximum number of retries
+                    retry_count = 0
+                    success = False
+                    
+                    # Check if raw_text4 is a valid JWT token (has 2 dots and longer than 30 chars)
+                    is_valid_token = raw_text4 and raw_text4 != "/d" and raw_text4.count('.') == 2 and len(raw_text4) > 30
+                    
+                    while not success and retry_count < max_retries:
+                        try:
+                            # Only add token if it's valid JWT
+                            params = {"url": url}
+                            if is_valid_token:
+                                params["token"] = raw_text4
+                                print("Using provided JWT token")
+                            
+                            # First try with direct URL
+                            response = requests.get(apis["API_CLASSPLUS"], params=params)
+                            
+                            if response.status_code == 200:
+                                try:
+                                    res_json = response.json()
+                                    url = res_json.get("data", {}).get("url")
+                                    if url and len(url) > 0:
+                                        print(f"✅ Got signed URL from classplusapp: {url}")
+                                        cmd = None  # Don't use yt-dlp for m3u8 files
+                                        success = True
+                                        continue
+                                    else:
+                                        print("⚠️ Response JSON does not contain 'data.url'. Here's full response:")
+                                        print(json.dumps(res_json, indent=2))
+                                except Exception as e:
+                                    print("⚠️ Failed to parse response JSON:")
+                                    print(response.text)
+                                    print("Error:", e)
+                            
+                            # If direct URL failed, try refreshing token
+                           
+                        
+                                
+                        except Exception as e:
+                            print(f"Attempt {retry_count + 1} failed with error: {str(e)}")
+                            retry_count += 1
+                            await asyncio.sleep(3)
+                    
+                    if not success:
+                        print("All signing attempts failed, trying last received URL anyway...")
 
             elif "childId" in url and "parentId" in url:
-                url = f"https://anonymouspwplayer-0e5a3f512dec.herokuapp.com/pw?url={url}&token={raw_text4}"
+                url = f"https://anonymousrajputplayer-9ab2f2730a02.herokuapp.com/pw?url={url}&token={raw_text4}"
                            
             elif "d1d34p8vz63oiq" in url or "sec1.pw.live" in url:
                 url = f"https://anonymouspwplayer-b99f57957198.herokuapp.com/pw?url={url}?token={raw_text4}"
@@ -799,23 +852,29 @@ async def txt_handler(bot: Client, m: Message):
 
             try:
                 cc = (
-    f"<b>🏷️ Fɪʟᴇ ID <b>: {str(count).zfill(3)}\n\n"
-    f"<b>🎞️ Tɪᴛʟᴇ</b> : {name1} \n\n"
-    f"<pre>📚 𝗕ᴀᴛᴄʜ : {b_name}</pre>\n"
-    f"<b>🎓 Exᴛʀᴀᴄᴛ Bʏ : {CR}</b>"
+    f"<b>──────  <i>VID ID </i>: {str(count).zfill(3)}  ──────</b>\n\n"
+    f"<b>🎥 ᴛɪᴛʟᴇ</b> : {name1}\n\n"
+    f"<blockquote>"
+    f"<b>💠 ʙᴀᴛᴄʜ :</b> {b_name}\n"
+    f"</blockquote>\n"
+    f"<b> 📥 ᴇxᴛʀᴀᴄᴛᴇᴅ ʙʏ :</b> {CR}"
 )
                 cc1 = (
-    f"<b>🏷️ Fɪʟᴇ ID <b>: {str(count).zfill(3)}\n\n"
-    f"<b>📑 Tɪᴛʟᴇ</b> : {name1} \n\n"
-    f"<pre>📚 𝗕ᴀᴛᴄʜ : `{b_name}` </pre> \n"
-    f"<b>🎓 Exᴛʀᴀᴄᴛ Bʏ : {CR}</b>"
+    f"<b>──────  <i>PDF ID </i>: {str(count).zfill(3)}  ──────</b>\n\n"
+    f"<b>📑 ᴛɪᴛʟᴇ</b> : {name1}\n\n"
+    f"<blockquote>"
+    f"<b>💠 ʙᴀᴛᴄʜ :</b> {b_name}\n"
+    f"</blockquote>\n"
+    f"<b> 📥 ᴇxᴛʀᴀᴄᴛᴇᴅ ʙʏ :</b> {CR}"
 )
                 cczip = f'[📁]Zip Id : {str(count).zfill(3)}\n**Zip Title :** `{name1} .zip`\n<blockquote><b>Batch Name :</b> {b_name}</blockquote>\n\n**Extracted by➤**{CR}\n' 
                 ccimg = (
-    f"<b>🏷️ Fɪʟᴇ ID <b>: {str(count).zfill(3)} \n\n"
-    f"<b>🖼️ Tɪᴛʟᴇ</b> : {name1} \n\n"
-    f"<pre>📚 𝗕ᴀᴛᴄʜ : `{b_name}` </pre> \n"
-    f"<b>🎓 Exᴛʀᴀᴄᴛ Bʏ : {CR}</b>"
+    f"<b>──────  <i>IMG ID </i>: {str(count).zfill(3)}  ──────</b>\n\n"
+    f"<b>🖼️ ᴛɪᴛʟᴇ</b> : {name1}\n\n"
+    f"<blockquote>"
+    f"<b>💠 ʙᴀᴛᴄʜ :</b> {b_name}\n"
+    f"</blockquote>\n"
+    f"<b> 📥 ᴇxᴛʀᴀᴄᴛᴇᴅ ʙʏ :</b> {CR}"
 )
                 ccm = f'[🎵]Audio Id : {str(count).zfill(3)}\n**Audio Title :** `{name1} .mp3`\n<blockquote><b>Batch Name :</b> {b_name}</blockquote>\n\n**Extracted by➤**{CR}\n'
                 cchtml = f'[🌐]Html Id : {str(count).zfill(3)}\n**Html Title :** `{name1} .html`\n<blockquote><b>Batch Name :</b> {b_name}</blockquote>\n\n**Extracted by➤**{CR}\n'
@@ -983,23 +1042,23 @@ async def txt_handler(bot: Client, m: Message):
         await bot.send_message(
     channel_id,
     (
-        "<b>📬 ᴘʀᴏᴄᴇꜱꜱ ᴄᴏᴍᴘʟᴇᴛᴇᴅ</b>\n\n"
-        "<blockquote><b>📚 ʙᴀᴛᴄʜ ɴᴀᴍᴇ :</b> "
+        "<b>✨ ᴘʀᴏᴄᴇꜱꜱ ᴄᴏᴍᴘʟᴇᴛᴇᴅ</b>\n\n"
+        "<blockquote><b>📌 ʙᴀᴛᴄʜ ɴᴀᴍᴇ :</b> "
         f"{b_name}</blockquote>\n"
         
         "╭────────────────\n"
-        f"├ 🖇️ ᴛᴏᴛᴀʟ ᴜʀʟꜱ : <code>{len(links)}</code>\n"
-        f"├ ✅ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟ : <code>{success_count}</code>\n"
+        f"├ 🔗 ᴛᴏᴛᴀʟ ᴜʀʟꜱ : <code>{len(links)}</code>\n"
+        f"├ 🟢 ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟ : <code>{success_count}</code>\n"
         f"├ ❌ ꜰᴀɪʟᴇᴅ : <code>{failed_count}</code>\n"
         "╰────────────────\n\n"
 
         "╭──────── 📦 ᴄᴀᴛᴇɢᴏʀʏ ────────\n"
         f"├ 🎞️ ᴠɪᴅᴇᴏꜱ : <code>{video_count}</code>\n"
-        f"├ 📑 ᴘᴅꜰꜱ : <code>{pdf_count}</code>\n"
+        f"├ 📄 ᴘᴅꜰꜱ : <code>{pdf_count}</code>\n"
         f"├ 🖼️ ɪᴍᴀɢᴇꜱ : <code>{img_count}</code>\n"
         "╰────────────────────────────\n\n"
         
-        "<i>ᴇxᴛʀᴀᴄᴛᴇᴅ ʙʏ ᴡɪᴢᴀʀᴅ ʙᴏᴛꜱ 🤖</i>"
+        "<i>ᴇxᴛʀᴀᴄᴛᴇᴅ ʙʏ ᴜɢ ʙᴏᴛꜱ ⚙️</i>"
     )
 )
 
@@ -1071,6 +1130,13 @@ async def text_handler(bot: Client, m: Message):
             if "acecwply" in url:
                 cmd = f'yt-dlp -o "{name}.%(ext)s" -f "bestvideo[height<={raw_text2}]+bestaudio" --hls-prefer-ffmpeg --no-keep-video --remux-video mkv --no-warning "{url}"'
 
+            elif "https://cpvod.testbook.com/" in url:
+                url = url.replace("https://cpvod.testbook.com/","https://media-cdn.classplusapp.com/drm/")
+                url = apis["API_DRM"] + url
+                mpd, keys = helper.get_mps_and_keys(url)
+                url = mpd
+                keys_string = " ".join([f"--key {key}" for key in keys])
+
             elif "https://static-trans-v1.classx.co.in" in url or "https://static-trans-v2.classx.co.in" in url:
                 base_with_params, signature = url.split("*")
 
@@ -1121,40 +1187,89 @@ async def text_handler(bot: Client, m: Message):
                     url = base_url.replace("https://static-db-v2.classx.co.in", "https://appx-content-v2.classx.co.in")
 
           
-            elif "https://cpvod.testbook.com/" in url or "classplusapp.com/drm/" in url:
-                url = url.replace("https://cpvod.testbook.com/","https://media-cdn.classplusapp.com/drm/")
-                url = f"https://covercel.vercel.app/extract_keys?url={url}@bots_updatee&user_id=7793257011"
-                mpd, keys = helper.get_mps_and_keys(url)
-                url = mpd
-                keys_string = " ".join([f"--key {key}" for key in keys])
 
-            elif "classplusapp" in url:
-                signed_api = f"https://covercel.vercel.app/extract_keys?url={url}@bots_updatee&user_id=7793257011"
-                response = requests.get(signed_api, timeout=20)
-                url = response.text.strip()
-                url = response.json()['url']  
-                
-            elif "tencdn.classplusapp" in url:
-                headers = {'host': 'api.classplusapp.com', 'x-access-token': f'{api_token}', 'accept-language': 'EN', 'api-version': '18', 'app-version': '1.4.73.2', 'build-number': '35', 'connection': 'Keep-Alive', 'content-type': 'application/json', 'device-details': 'Xiaomi_Redmi 7_SDK-32', 'device-id': 'c28d3cb16bbdac01', 'region': 'IN', 'user-agent': 'Mobile-Android', 'webengage-luid': '00000187-6fe4-5d41-a530-26186858be4c', 'accept-encoding': 'gzip'}
-                params = {"url": f"{url}"}
-                response = requests.get('https://api.classplusapp.com/cams/uploader/video/jw-signed-url', headers=headers, params=params)
-                url = response.json()['url']  
-           
-            elif 'videos.classplusapp' in url:
-                url = requests.get(f'https://api.classplusapp.com/cams/uploader/video/jw-signed-url?url={url}', headers={'x-access-token': f'{cptoken}'}).json()['url']
-            
-            elif 'media-cdn.classplusapp.com' in url or 'media-cdn-alisg.classplusapp.com' in url or 'media-cdn-a.classplusapp.com' in url: 
-                headers = {'host': 'api.classplusapp.com', 'x-access-token': f'{api_token}', 'accept-language': 'EN', 'api-version': '18', 'app-version': '1.4.73.2', 'build-number': '35', 'connection': 'Keep-Alive', 'content-type': 'application/json', 'device-details': 'Xiaomi_Redmi 7_SDK-32', 'device-id': 'c28d3cb16bbdac01', 'region': 'IN', 'user-agent': 'Mobile-Android', 'webengage-luid': '00000187-6fe4-5d41-a530-26186858be4c', 'accept-encoding': 'gzip'}
-                params = {"url": f"{url}"}
-                response = requests.get('https://api.classplusapp.com/cams/uploader/video/jw-signed-url', headers=headers, params=params)
-                url   = response.json()['url']
 
-            if "edge.api.brightcove.com" in url:
-                bcov = f'bcov_auth={cwtoken}'
-                url = url.split("bcov_auth")[0]+bcov
+            elif "classplusapp.com/drm/" in url:
+                print("\n🔐 Fetching DRM keys...")
+                api_url = apis["API_DRM"] + url
+                max_retries = 2  # Reduced retries
+                retry_count = 0
+
+                while retry_count < max_retries:
+                    try:
+                        retry_count += 1
+                        mpd, keys = helper.get_mps_and_keys(api_url)
+
+                        if mpd and keys:
+                            url = mpd
+                            keys_string = " ".join([f"--key {key}" for key in keys])
+                            print("✅ DRM keys fetched!")
+                            break
+                        
+                        print(f"⚠️ Retry {retry_count}/{max_retries}...")
+                        await asyncio.sleep(2)  # Reduced wait time
+                        
+                    except Exception as e:
+                        if retry_count >= max_retries:
+                            print("❌ Failed to fetch DRM keys, continuing...")
+                            break
+                        print(f"⚠️ Retry {retry_count}/{max_retries}...")
+                        await asyncio.sleep(2)  # Reduced wait time
+
+
+            elif 'media-cdn.classplusapp.com' in url or 'media-cdn-alisg.classplusapp.com' in url or 'media-cdn-a.classplusapp.com' in url or 'videos.classplusapp' in url or 'tencdn.classplusapp' in url: 
+                if 'master.m3u8' in url:
+                    print(f"Processing Classplus URL: {url}")
+                    max_retries = 3  # Maximum number of retries
+                    retry_count = 0
+                    success = False
+                    
+                    # Check if raw_text4 is a valid JWT token (has 2 dots and longer than 30 chars)
+                    is_valid_token = raw_text4 and raw_text4 != "/d" and raw_text4.count('.') == 2 and len(raw_text4) > 30
+                    
+                    while not success and retry_count < max_retries:
+                        try:
+                            # Only add token if it's valid JWT
+                            params = {"url": url}
+                            if is_valid_token:
+                                params["token"] = raw_text4
+                                print("Using provided JWT token")
+                            
+                            # First try with direct URL
+                            response = requests.get(apis["API_CLASSPLUS"], params=params)
+                            
+                            if response.status_code == 200:
+                                try:
+                                    res_json = response.json()
+                                    url = res_json.get("data", {}).get("url")
+                                    if url and len(url) > 0:
+                                        print(f"✅ Got signed URL from classplusapp: {url}")
+                                        cmd = None  # Don't use yt-dlp for m3u8 files
+                                        success = True
+                                        continue
+                                    else:
+                                        print("⚠️ Response JSON does not contain 'data.url'. Here's full response:")
+                                        print(json.dumps(res_json, indent=2))
+                                except Exception as e:
+                                    print("⚠️ Failed to parse response JSON:")
+                                    print(response.text)
+                                    print("Error:", e)
+                        
+                            # If direct URL failed, try refreshing token
+                            print(f"Attempt {retry_count + 1} failed with status {response.status_code}")
+                            
+                           
+                            
+                        except Exception as e:
+                            print(f"Attempt {retry_count + 1} failed with error: {str(e)}")
+                            retry_count += 1
+                            await asyncio.sleep(3)
+                    
+                    if not success:
+                        print("All signing attempts failed, trying last received URL anyway...")
 
             elif "childId" in url and "parentId" in url:
-                    url = f"https://anonymouspwplayer-0e5a3f512dec.herokuapp.com/pw?url={url}&token={raw_text4}"
+                    url = f"https://anonymousrajputplayer-9ab2f2730a02.herokuapp.com/pw?url={url}&token={raw_text4}"
                            
             elif "d1d34p8vz63oiq" in url or "sec1.pw.live" in url:
                 url = f"https://anonymouspwplayer-b99f57957198.herokuapp.com/pw?url={url}?token={raw_text4}"
@@ -1183,7 +1298,7 @@ async def text_handler(bot: Client, m: Message):
                 cmd = f'yt-dlp -f "{ytf}" "{url}" -o "{name}.mp4"'
 
             try:
-                cc = f'**🎞️ Title :**`{name} [{res}].mp4`\n🖇️ LNK <a href="{link}">**CLICK HERE**</a>\n\n🎓 Uploded By : {CREDIT}'
+                cc = f'🎞️𝐓𝐢𝐭𝐥𝐞 » `{name} [{res}].mp4`\n🔗𝐋𝐢𝐧𝐤 » <a href="{link}">__**CLICK HERE**__</a>\n\n🌟𝐄𝐱𝐭𝐫𝐚𝐜𝐭𝐞𝐝 𝐁𝐲 » `{CREDIT}`'
                 cc1 = f'📕𝐓𝐢𝐭𝐥𝐞 » `{name}`\n🔗𝐋𝐢𝐧𝐤 » <a href="{link}">__**CLICK HERE**__</a>\n\n🌟𝐄𝐱𝐭𝐫𝐚𝐜𝐭𝐞𝐝 𝐁𝐲 » `{CREDIT}`'
                   
                 if "drive" in url:
