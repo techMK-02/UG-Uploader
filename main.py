@@ -77,7 +77,7 @@ apis = client.get_apis()
 watermark = "@GovtxExam"  # Default value
 count = 0
 userbot = None
-timeout_duration = 300  # 5 minutes
+timeout_duration = 60  # 5 minutes
 
 
 # Initialize bot with random session
