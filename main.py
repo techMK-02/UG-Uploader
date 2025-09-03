@@ -563,7 +563,7 @@ async def txt_handler(bot: Client, m: Message):
     chat_id = editable.chat.id
     timeout_duration = 3 if auto_flags.get(chat_id) else 20
 
-    await editable.edit("**Enter watermark text or send /d**")
+    await editable.edit("**1. Enter A Text For Watermark\n2.Send /d For Default **")
     try:
         inputx: Message = await bot.listen(editable.chat.id, timeout=timeout_duration)
         raw_textx = inputx.text
@@ -574,11 +574,11 @@ async def txt_handler(bot: Client, m: Message):
     # Define watermark variable based on input
     global watermark
     if raw_textx == '/d':
-        watermark = "UG"
+        watermark = " "
     else:
         watermark = raw_textx
     
-    await editable.edit(f"__**Enter the Credit Name or send /d\nOr Send **Admin,file prename**\nSeparate them with a comma (,)\n\n<blockquote><i>Example for caption only: Admin\nExample for both caption and file name: Admin,Prename</i></blockquote>**")
+    await editable.edit(f"**1. Send Your Name Fir Caption\n2. Send /d Gor default Credit **")
     try:
         input3: Message = await bot.listen(editable.chat.id, timeout=timeout_duration)
         raw_text3 = input3.text
@@ -591,10 +591,10 @@ async def txt_handler(bot: Client, m: Message):
     elif "," in raw_text3:
         CR, PRENAME = raw_text3.split(",")
     else:
-        CR = raw_text3
+        CR = raw_text3.split(",")
     chat_id = editable.chat.id
     timeout_duration = 3 if auto_flags.get(chat_id) else 20
-    await editable.edit(f"**send the token of __PW__ or ClassPlus [Optional] OR send /d**")
+    await editable.edit(f"**1. Sebd PW Token For mpd urls \n 2. Send CP Token or /d**")
     try:
         input4: Message = await bot.listen(editable.chat.id, timeout=timeout_duration)
         raw_text4 = input4.text
@@ -603,17 +603,7 @@ async def txt_handler(bot: Client, m: Message):
         raw_text4 = '/d'
     chat_id = editable.chat.id
     timeout_duration = 3 if auto_flags.get(chat_id) else 20
-    await editable.edit("**Send /skip for next step")
-    thumb = "/d"  # Set default value
-    try:
-        input4: Message = await bot.listen(editable.chat.id, timeout=timeout_duration)
-        raw_text4 = input4.text
-        await input4.delete(True)
-    except asyncio.TimeoutError:
-        raw_text4 = '/d'
-    chat_id = editable.chat.id
-    timeout_duration = 3 if auto_flags.get(chat_id) else 20
-    await editable.edit("**Send Video Thumbnail:**\n\n• Send Photo for custom thumbnail\n• Send /d for default thumbnail\n• Send /skip to skip")
+    await editable.edit("**1. Send Image For Thumbnail\n2. Send /d For Default Thumbnail\n3. Send /skip For Skipping Thumbnail**")
     thumb = "/d"  # Set default value
     try:
         input6 = await bot.listen(chat_id=m.chat.id, timeout=timeout_duration)
@@ -637,11 +627,11 @@ async def txt_handler(bot: Client, m: Message):
         elif input6.text:
             if input6.text == "/d":
                 thumb = "/d"
-                await editable.edit("**ℹ️ Using default thumbnail.**")
+                await editable.edit("**📰 Using default thumbnail.**")
                 await asyncio.sleep(1)
             elif input6.text == "/skip":
                 thumb = "no"
-                await editable.edit("**ℹ️ Skipping thumbnail.**")
+                await editable.edit("**♻️ Skipping thumbnail.**")
                 await asyncio.sleep(1)
             else:
                 await editable.edit("**⚠️ Invalid input! Using default thumbnail.**")
@@ -655,7 +645,7 @@ async def txt_handler(bot: Client, m: Message):
         await editable.edit("**⚠️ Error! Using default thumbnail.**")
         await asyncio.sleep(1)
  
-    await editable.edit("__**📍 Provide the Channel ID or send /d__\n\n<blockquote>🔹Send Your Channel ID where you want upload files.\n\nEx : -100XXXXXXXXX</blockquote>\n**")
+    await editable.edit("__**📢 Provide the Channel ID or send /d__\n\n<blockquote>🔹Send Your Channel ID where you want upload files.\n\nEx : `-100XXXXXXXXX`</blockquote>\n**")
     try:
         input7: Message = await bot.listen(editable.chat.id, timeout=timeout_duration)
         raw_text7 = input7.text
