@@ -74,7 +74,7 @@ client = SecureAPIClient()
 apis = client.get_apis()
 
 # Global variables
-watermark = "@GovtxExam"  # Default value
+watermark = "DevWizard02"  # Default value
 count = 0
 userbot = None
 timeout_duration = 60  # 5 minutes
