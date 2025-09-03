@@ -1,4 +1,4 @@
-# 🔧 Standard Library
+# ⚙️ Standard Library
 import os
 import re
 import sys
@@ -14,10 +14,10 @@ from datetime import datetime, timedelta
 from base64 import b64encode, b64decode
 from subprocess import getstatusoutput
 
-# 🕒 Timezone
+# 🌏 Timezone
 import pytz
 
-# 📦 Third-party Libraries
+# 💀 Third-party Libraries
 import aiohttp
 import aiofiles
 import requests
@@ -32,7 +32,7 @@ from pytube import YouTube
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import unpad
 
-# ⚙️ Pyrogram
+# 🚧 Pyrogram
 from pyrogram import Client, filters, idle
 from pyrogram.handlers import MessageHandler
 from pyrogram.types import (
@@ -65,11 +65,6 @@ from utils import progress_bar
 from vars import *
 from pyromod import listen
 from db import db
-
-auto_flags = {}
-auto_clicked = False
-client = SecureAPIClient()
-apis = client.get_apis()
 
 # Global variables
 watermark = "DevWizard02"  # Default value
